@@ -1,5 +1,8 @@
 FROM debian:wheezy
-MAINTAINER Fernando Mayo <fernando@tutum.co>
+#
+#
+#
+MAINTAINER "Kirill Müller" <krlmlr+docker@mailbox.org>
 
 # Install packages
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server pwgen
