@@ -20,6 +20,6 @@ debug-connect: .FORCE
 	ssh root@localhost -p 2222 -o "StrictHostKeyChecking=no" env
 
 distribute: .FORCE
-	for b in $$(git branch --no-merged); do git merge-into $$b; done
+	for b in $$(git branch --no-merged); do git merge-into $$b --no-edit; done
 
 .FORCE:
