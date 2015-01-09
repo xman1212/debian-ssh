@@ -4,6 +4,24 @@ debian-ssh
 Simple Debian Docker images with *passwordless* SSH access and a regular user
 with `sudo` rights
 
+Tags (and their corresponding official base images)
+----
+
+### Debian
+
+- `latest` -> `debian:latest`
+- `jessie` -> `debian:jessie`
+- `wheezy` -> `debian:wheezy`
+- `squeeze` -> `debian:squeeze`
+
+### Ubuntu
+
+- `ubuntu` -> `ubuntu:latest`
+- `vivid` -> `ubuntu:vivid`
+- `utopic` -> `ubuntu:utopic`
+- `trusty` -> `ubuntu:trusty`
+- `precise` -> `ubuntu:precise`
+
 
 Using
 -----
