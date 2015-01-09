@@ -1,29 +1,21 @@
 #!/bin/bash
 
-if [ -f /.root_pw_set ]; then
-	echo "Root password already set!"
-	exit 0
+if [ -z "${SSH_KEY}" ]; then
+	echo "=> Please pass your public key in the SSH_KEY environment variable"
+	exit 1
 fi
 
-PASS=${ROOT_PASS:-$(pwgen -s 12 1)}
-_word=$( [ ${ROOT_PASS} ] && echo "preset" || echo "random" )
-echo "=> Setting a ${_word} password to the root user"
-echo "root:$PASS" | chpasswd
+USER=$(whoami)
+
+echo "=> Adding SSH key for the user ${USER}"
+mkdir -p ~/.ssh
+chmod go-rwx ~/.ssh
+echo "${SSH_KEY}" > ~/.ssh/authorized_keys
+chmod go-rw ~/.ssh/authorized_keys
 
 echo "=> Done!"
-touch /.root_pw_set
-
 echo "========================================================================"
-echo "You can now connect to this Debian container via SSH using:"
+echo "You can now connect to this container via SSH using:"
 echo ""
-echo "    ssh -p <port> root@<host>"
-echo "and enter the root password '$PASS' when prompted"
-echo ""
-echo "Please remember to change the above password as soon as possible!"
+echo "    ssh -p <port> $USER@<host>"
 echo "========================================================================"
-
-if [ -n "${ROOT_KEY}" ]; then
-	echo "=> Adding an SSH key for the root user"
-	mkdir -p /root/.ssh
-	echo ${ROOT_KEY} > authorized_keys
-fi
