@@ -1,59 +1,31 @@
-tutum-debian
-============
+debian-ssh
+==========
 
-Simple Debian docker images with SSH access
+Simple Debian docker images with *passwordless* SSH access and a regular user
+with `sudo` rights
 
 
 Usage
 -----
 
-To create the image `tutum/debian` with one tag per Debian release, 
-execute the following commands on the tutum-debian folder:
+Each Debian release corresponds to a branch, the branches differ only by
+the `FROM` element in the `Dockerfile`.
 
-    git checkout master
-    dcoker build -t tutum/debian:latest .
+To create the image `krlmlr/debian-ssh` e.g. for Debian "jessie":
 
-    git checkout squeeze
-	docker build -t tutum/debian:squeeze .
+    git checkout jessie
+    make build
 
-    git checkout wheezy
-	docker build -t tutum/debian:wheezy .
+Use `make rebuild` to pull the base image and rebuild without caching.
 
 
-Running tutum/debian
---------------------
+Running
+-------
 
-To run a container from the image you created earlier with the `wheezy` tag 
-binding it to port 2222 in all interfaces, execute:
-
-	docker run -d -p 2222:22 tutum/debian:wheezy
-
-The first time that you run your container, a random password will be generated
-for user `root`. To get the password, check the logs of the container by running:
-
-	docker logs <CONTAINER_ID>
-
-You will see an output like the following:
-
-	========================================================================
-	You can now connect to this Debian container via SSH using:
-
-	    ssh -p <port> root@<host>
-	and enter the root password 'U0iSGVUCr7W3' when prompted
-
-	Please remember to change the above password as soon as possible!
-	========================================================================
-
-In this case, `U0iSGVUCr7W3` is the password allocated to the `root` user.
-
-Done!
-
-
-Setting a specific password for the root account
-------------------------------------------------
-
-If you want to use a preset password instead of a random generated one, you can
-set the environment variable `ROOT_PASS` to your specific password when running the container:
-
-	docker run -d -p 2222:22 -e ROOT_PASS="mypass" tutum/debian:wheezy
-
+Execute `make test` to create a container and fetch all environment variables
+via SSH.  This requires an `.ssh/id_rsa.pub` file in your home, it will be
+passed to the container via the environment variable `SSH_KEY` and installed.
+The `Makefile` is configured to run the container with the limited `docker`
+account, this user is allowed to run `sudo` without requiring a password.
+The SSH daemon will be always run with root access.  The `debug-*` targets
+can help troubleshooting any issues you might encounter.
