@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -z "${ROOT_KEY}" ]; then
-	echo "=> Please pass your public key in the ROOT_KEY environment variable"
+if [ -z "${SSH_KEY}" ]; then
+	echo "=> Please pass your public key in the SSH_KEY environment variable"
 	exit 1
 fi
 
@@ -10,7 +10,7 @@ USER=$(whoami)
 echo "=> Adding SSH key for the user ${USER}"
 mkdir -p ~/.ssh
 chmod go-rwx ~/.ssh
-echo "${ROOT_KEY}" > ~/.ssh/authorized_keys
+echo "${SSH_KEY}" > ~/.ssh/authorized_keys
 chmod go-rw ~/.ssh/authorized_keys
 
 echo "=> Done!"
