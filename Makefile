@@ -32,6 +32,9 @@ debug-ssh: build .FORCE
 debug-connect: .FORCE
 	ssh $(DOCKER_USER)@localhost -p $(PORT) -o "StrictHostKeyChecking=no" env
 
+debug-connect-root: .FORCE
+	ssh root@localhost -p $(PORT) -o "StrictHostKeyChecking=no" env
+
 debug-bash: build .FORCE
 	docker run -ti -u $(DOCKER_USER) $(CONTAINER_NAME) bash
 
