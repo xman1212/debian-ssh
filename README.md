@@ -1,7 +1,7 @@
 debian-ssh
 ==========
 
-Simple Debian Docker images with *passwordless* SSH access and a regular user
+Simple Debian/Ubuntu Docker images with *passwordless* SSH access and a regular user
 with `sudo` rights
 
 Tags (and their corresponding official base images)
