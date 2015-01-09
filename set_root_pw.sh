@@ -21,3 +21,9 @@ echo "and enter the root password '$PASS' when prompted"
 echo ""
 echo "Please remember to change the above password as soon as possible!"
 echo "========================================================================"
+
+if [ -n "${ROOT_KEY}" ]; then
+	echo "=> Adding an SSH key for the root user"
+	mkdir -p /root/.ssh
+	echo ${ROOT_KEY} > authorized_keys
+fi
