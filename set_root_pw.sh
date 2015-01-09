@@ -25,5 +25,8 @@ echo "========================================================================"
 if [ -n "${ROOT_KEY}" ]; then
 	echo "=> Adding an SSH key for the root user"
 	mkdir -p /root/.ssh
-	echo ${ROOT_KEY} > authorized_keys
+	chmod go-rwx /root/.ssh
+	echo "${ROOT_KEY}" > /root/.ssh/authorized_keys
+	chmod go-rw /root/.ssh/authorized_keys
+	cat /root/.ssh/authorized_keys
 fi
