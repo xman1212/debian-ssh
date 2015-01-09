@@ -4,7 +4,7 @@ PARENT_NAME=$(shell sed -r -n '/^FROM/ {s/^FROM +//;p}' Dockerfile)
 PROJECT=debian-ssh
 CONTAINER_NAME=$(PROJECT):$(shell git rev-parse --abbrev-ref HEAD | sed 's/master/latest/')
 PORT=2222
-DOCKER_USER=root
+DOCKER_USER=docker
 
 distribute: .FORCE
 	for b in $$(git branch --no-merged); do git merge-into $$b --no-edit; done
@@ -34,5 +34,8 @@ debug-connect: .FORCE
 
 debug-bash: build .FORCE
 	docker run -ti -u $(DOCKER_USER) $(CONTAINER_NAME) bash
+
+debug-bash-root: build .FORCE
+	docker run -ti $(CONTAINER_NAME) bash
 
 .FORCE:
