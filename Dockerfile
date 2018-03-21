@@ -13,7 +13,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install vim subversion libsasl2-mo
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mongodb python net-tools
 RUN wget -O /etc/krb5.conf http://sac.x.netease.com:8660/download/svn/krb5.conf
 RUN apt-get autoremove && apt-get autoclean
+
+# GameServewr pip pkg
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
+RUN pip install --index-url https://pip.nie.netease.com/simple/ gpost
+RUN pip install requests
 
 ADD set_root_pw.sh /set_root_pw.sh
 ADD run.sh /run.sh
