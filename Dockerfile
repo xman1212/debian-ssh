@@ -46,7 +46,19 @@ RUN useradd -ms /bin/bash xiang \
         && passwd -d root \
         && passwd -d xiang 
 
-EXPOSE 22
-CMD ["/run.sh"]
+# ssh
+EXPOSE 22 
+# game login port
+EXPOSE 4000
+# game rpyc service
+EXPOSE 8118
+# game code
+RUN mkdir /game 
+ADD ./ServerForSA /game
+
+# db storage path: /var/lib/mongodb/
+# game log path: /game/server/log/
+
+CMD ["/bin/bash", "/run.sh"]
 
 
