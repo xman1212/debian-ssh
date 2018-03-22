@@ -11,6 +11,7 @@ echo 4
 bash run_server.sh
 echo 5
 cd ../script/rpyc_server
+bash run.sh
 echo 6
 
 set -e

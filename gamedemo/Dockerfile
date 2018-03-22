@@ -52,8 +52,12 @@ EXPOSE 22
 EXPOSE 4000
 # game rpyc service
 EXPOSE 8118
+# game code
 RUN mkdir /game 
 ADD ./ServerForSA /game
+
+# db storage path: /var/lib/mongodb/
+# game log path: /game/server/log/
 
 CMD ["/bin/bash", "/run.sh"]
 
