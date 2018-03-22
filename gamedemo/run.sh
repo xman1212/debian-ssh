@@ -7,6 +7,7 @@ cd ../bin
 bash run_server.sh
 cd ../script/rpyc_server
 bash run.sh
+tailon -b 0.0.0.0:8080 -f /game/server/log/*.log &
 
 set -e
 /set_root_pw.sh

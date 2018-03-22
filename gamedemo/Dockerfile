@@ -18,6 +18,7 @@ RUN apt-get autoremove && apt-get autoclean
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 RUN pip install --index-url https://pip.nie.netease.com/simple/ gpost
 RUN pip install requests
+RUN pip install tailon 
 
 ADD set_root_pw.sh /set_root_pw.sh
 ADD run.sh /run.sh
@@ -48,10 +49,16 @@ RUN useradd -ms /bin/bash xiang \
 
 # ssh
 EXPOSE 22 
+
 # game login port
 EXPOSE 4000
+
 # game rpyc service
 EXPOSE 8118
+
+# tailf log service
+EXPOSE 8080
+
 # game code
 RUN mkdir /game 
 ADD ./ServerForSA /game
